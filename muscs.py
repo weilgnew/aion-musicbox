@@ -96,7 +96,7 @@ def sixth_next():
         return 3
     if x > 4.5 and x <= 5.5 :
         return 4
-    if x < 1.5 and x > 5.5 :
+    if x < 1.5 or x > 5.5 :
         return 1
 
 def seventh_next():
