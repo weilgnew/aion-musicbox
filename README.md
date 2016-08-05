@@ -1,8 +1,7 @@
 # aion-musicbox
-
 # Procedural music generator
 
-
+#Progress
 1. Harmony to generate the music melody in list form [array]
   - Simple harmony rule to generate melody embedded in the main .py file
   - Normal distribution is used to determine the probability of note's generation
@@ -22,3 +21,9 @@
 
 6. Play the music?
   - Use a media player, no plan to integrate the music player into the project
+
+# Standard for waveform_gen
+# waveform_gen is a function that generates the waveform for wav file exporter using the melody list
+
+melody = [note1, duration1, note2, duration2, note3, duration3, ...]
+-multiple layers add to one track by having note1, note 2, note3 with respective duration
