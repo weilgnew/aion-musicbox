@@ -1,16 +1,11 @@
-from pyaudio import PyAudio
-import wave
-import sys
-import math
 import random
 from scipy.io import wavfile
 import numpy as np
 from waveform_generator import waveform_gen_exp
 
-
+##############################################################################################################################
 # notes hold the dictionary to frequency of different notes
 note=[]
-
 # Import the note's frequency data
 count = 0
 filename = 'C:/Python34/note_frequency.txt'
@@ -22,9 +17,9 @@ with open(filename) as file_note:
 
 file_note.close()
 
+##############################################################################################################################
 # Melody generation algorithm
 # Functions to define the movement of the melody
-
 def root_next():
     x = random.normalvariate(3.5, 1)
     if x > 3.5 and x <= 4.5:
@@ -117,11 +112,21 @@ def seventh_next():
         return 4
     if x > 5.8:
         return 5
-
-# Generate the melody with function
+        
+###########################################################################################################################
+# Set the parameters
+# Generation of the melody
 melody = [5]
 print(melody[0])
-length = 50
+length = 50     # set the melody length
+root = 37       # set the melody root note
+volume=15       # set the volume, self explanatory I believe 
+sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
+tempo = 20      # how long for one bar, in sec 
+bar = 10        # how many bar, not the one with liquor
+
+############################################################################################################################
+# Yes, this is where it generates the melody, or movement, progression
 for i in range(1, length):
     print(i)
     if melody[i-1] == 1:
@@ -139,23 +144,13 @@ for i in range(1, length):
     if melody[i-1] == 7:
         melody.append(seventh_next())
     
+# Just to let you know the progresion
 print(melody)
 
-# Play the melody
+samples = [] # what is this for? I forgot. Check if it is needed, if not just delete it
 
-volume=15
-sample_rate = 22050
-note_duration = 1
-tempo = 20
-bar = 10
-
-# Set the root
-root = 37
-
-# n_samples = int(sample_rate*duration)
-
-samples = []
-music = []
+##############################################################################################################################
+# beat generator, it doesnt need to be here, best is in another function or file. Well,  when I have time
 beat = []
 for i in range(0,30):
     if i%2 == 0:
@@ -169,10 +164,7 @@ for i in range(0,30):
 #beat = [0.5]*51
 #print(beat)
 
-# waveform generation mechanism
-#def wavform(t):
-#    return (volume * np.sin(2 * 3.142 * note[root+play][1] * t / sample_rate)*np.exp(-0.00005*t))
-
+#############################################################################################################################
 # Create the melody array
 for i in range(0, length):
     if melody[i] == 1:
@@ -189,14 +181,12 @@ for i in range(0, length):
         melody[i] = [9 + root, note[9 + root][1]]
     if melody[i] == 7:
         melody[i] = [11 + root, note[11 + root][1]]
-        
 
-    #s = lambda t: (volume * np.sin(2 * 3.142 * note[root+play][1] * t / sample_rate)+(volume)*np.sin(2 * 3.142 * (4/2)*note[root+play][1] * t / sample_rate)+(volume)*np.sin(2 * 3.142 * (0.2)*note[root+play][1] * t / sample_rate))
-    #for t in xrange(n_samples):
-    #    samples.append(int(wavform(t) * 127 + 128))
-print(melody)
+# generate the waveform with waveform_gen function
 samples = waveform_gen_exp(bar, tempo, sample_rate, melody, beat)
 
+##############################################################################################################################
+# generate the wav file
 samples2 = np.asarray(samples)
 wavfile.write('wave_test0608.wav', sample_rate, samples2.astype(np.dtype('i2')))
 
