@@ -11,7 +11,7 @@ def chord_maj_gen(root, melody_list):
     for note in melody_list:
         if random.randint(1,2) == 2:
             piece[i].append(note - 12 + random.choice([0,4,7]))
-            piece[i].append(piece[i][0]+random.choice([4,-5]))
+            piece[i].append(note - 12 + random.choice([-8,-5]))
         else:
             piece[i].append(note - 12 + random.choice([0,4,7]))
             
@@ -24,19 +24,19 @@ def chord_maj_gen(root, melody_list):
     i = 0
     for note in melody_list:
         if random.randint(3,4) == 3:
-            piece[i].append(note + 12 + random.choice([0,4,7]))
-            piece[i].append(piece[i][-1]+random.choice([4,-5]))
-            piece[i].append(piece[i][-2]+random.choice([7,-8]))
+            piece[i].append(note + 12 + random.choice([0,4]))
+            piece[i].append(note + 12 + random.choice([-5,-8]))
+            piece[i].append(note + 12 + random.choice([7,-12]))
         else:
-            piece[i].append(note + 12 + random.choice([0,4,7]))
-            piece[i].append(piece[i][-1]+random.choice([4,-5]))
-            piece[i].append(piece[i][-2]+random.choice([7,-8]))
-            piece[i].append(piece[i][-3]+random.choice([12,-12]))
+            piece[i].append(note + 12 + random.choice([0,4]))
+            piece[i].append(note + 12 + random.choice([-5,-8]))
+            piece[i].append(note + 12 + random.choice([7,-12]))
+            piece[i].append(note + 12 + random.choice([12,16]))
     
         i = i + 1
    
     return piece
     
 
-melody = [1,2,3,4,5]
-print(chord_maj_gen(0, melody))
+#melody = [1,2,3,4,5]
+#print(chord_maj_gen(0, melody))
