@@ -1,6 +1,7 @@
 import random
 
-def chord_maj_gen(root, melody_list):
+######################################################################################################
+def chord_maj_ran_gen(root, melody_list):
     # major trial
     # 0, 4, 7 half steps up
     # 0, -5, -8 half step down
@@ -37,6 +38,6 @@ def chord_maj_gen(root, melody_list):
    
     return piece
     
-
+############################################################################################################
 #melody = [1,2,3,4,5]
 #print(chord_maj_gen(0, melody))
