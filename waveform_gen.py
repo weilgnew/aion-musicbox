@@ -28,7 +28,7 @@ def waveform_gen_sine(bar, tempo, sample_rate, piece_list,beat_list):
     note_duration = 4
     
     # declare list to store waveform
-    waveform = [0] * (bar + 1) * tempo * sample_rate
+    waveform = [0] * (bar + 1) * sample_rate
     # Total sample for one note
     note_sample = sample_rate * note_duration
     # The time progress for waveform
@@ -57,7 +57,7 @@ def waveform_gen_exp(bar, tempo, sample_rate, piece_list,beat_list):
     note_duration = 2
     
     # declare list to store waveform
-    waveform = [0] * (bar + 1) * tempo * sample_rate
+    waveform = [0] * (bar + 1)  * note_duration * 8 * sample_rate
     # Total sample for one note
     note_sample = sample_rate * note_duration
     # The time progress for waveform
