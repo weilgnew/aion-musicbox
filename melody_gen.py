@@ -97,7 +97,7 @@ def melody_gen_sim(length):
         if x > 5.8:
             return 5
     
-    melody = []
+    melody = [1]
     for i in range(1, length):
         print(i)
         if melody[i-1] == 1:
