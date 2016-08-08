@@ -1,7 +1,8 @@
 # aion-musicbox
 # Procedural music generator
 
-# Latest file is music_scipy_2.py
+# Latest file is music_scipy_current.py
+# All old version is in the backup
 #Progress
 1. Harmony to generate the music melody in list form [array]  - done, but need more complex mechanism, in future
   - Simple harmony rule to generate melody embedded in the main .py  
