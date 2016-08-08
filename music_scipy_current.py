@@ -120,9 +120,9 @@ def seventh_next():
 melody = [1]
 print(melody[0])
 length = 50     # set the melody length
-root = 36       # set the melody root note
+root = 40       # set the melody root note
 volume=15       # set the volume, self explanatory I believe 
-sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
+sample_rate = 15000 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate, 22050
 tempo = 20      # how long for one bar, in sec 
 bar = 10        # how many bar, not the one with liquor
 
@@ -130,20 +130,27 @@ bar = 10        # how many bar, not the one with liquor
 # Yes, this is where it generates the melody, or movement, progression
 for i in range(1, length):
     print(i)
-    if melody[i-1] == 1:
+    if melody[-1] == 1:
         melody.append(root_next())
-    if melody[i-1] == 2:
+        melody.append(melody[-1])
+    if melody[-1] == 2:
         melody.append(second_next())
-    if melody[i-1] == 3:
+        melody.append(melody[-1])
+    if melody[-1] == 3:
         melody.append(third_next())
-    if melody[i-1] == 4:
+        melody.append(melody[-1])
+    if melody[-1] == 4:
         melody.append(fourth_next())
-    if melody[i-1] == 5:
+        melody.append(melody[-1])
+    if melody[-1] == 5:
         melody.append(fifth_next())
-    if melody[i-1] == 6:
+        melody.append(melody[-1])
+    if melody[-1] == 6:
         melody.append(sixth_next())
-    if melody[i-1] == 7:
+        melody.append(melody[-1])
+    if melody[-1] == 7:
         melody.append(seventh_next())
+        melody.append(melody[-1])
     
 # Just to let you know the progresion
 print(melody)
@@ -172,7 +179,7 @@ for i in range(0,100):
 
 #############################################################################################################################
 # Create the melody array
-for i in range(0, length):
+for i in range(0, len(melody)):
     if melody[i] == 1:
         melody[i] = 0 + root
     if melody[i] == 2:
