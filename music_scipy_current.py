@@ -119,7 +119,7 @@ def seventh_next():
 # Generation of the melody
 melody = [1]
 print(melody[0])
-length = 100     # set the melody length
+length = 50     # set the melody length
 root = 36       # set the melody root note
 volume=15       # set the volume, self explanatory I believe 
 sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
@@ -155,15 +155,14 @@ samples = [] # what is this for? I forgot. Check if it is needed, if not just de
 beat = []
 for i in range(0,100):
     if i%2 == 0:
+        beat.append(1)
+        beat.append(0.5)
+        beat.append(1)
         beat.append(0.5)
         beat.append(0.25)
-        beat.append(0.125)
         beat.append(0.25)
-        beat.append(0.125)
-        beat.append(0.25)
-        beat.append(0.125)
-        beat.append(0.25)
-        beat.append(0.125)
+
+
     else:
         beat.append(0.5)
         beat.append(0.5)
