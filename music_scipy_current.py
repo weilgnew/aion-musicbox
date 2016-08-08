@@ -1,9 +1,9 @@
-import random
 from scipy.io import wavfile
 import numpy as np
-from waveform_generator import waveform_gen_exp
+from waveform_gen import waveform_gen_exp
 from chord_gen import chord_maj_ran_gen
 from melody_gen import melody_gen_sim
+from beat_gen import beat_gen_sim
 
 ##############################################################################################################################
 # notes hold the dictionary to frequency of different notes
@@ -25,11 +25,12 @@ file_note.close()
 # Generation of the melody
 melody = [1]
 length = 50     # set the melody length
-root = 36       # set the melody root note
-volume=15       # set the volume, self explanatory I believe 
+root = 10       # set the melody root note
+volume = 15       # set the volume, self explanatory I believe 
 sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
-tempo = 20      # how long for one bar, in sec 
+tempo = 0.125      # fastest speed for one note, in sec 
 bar = 10        # how many bar, not the one with liquor
+
 
 ############################################################################################################################
 # Yes, this is where it generates the melody, or movement, progression
@@ -42,20 +43,10 @@ print(melody)
 
 ##############################################################################################################################
 # beat generator, it doesnt need to be here, best is in another function or file. Well,  when I have time
-beat = []
-for i in range(0,100):
-    if i%2 == 0:
-        beat.append(1)
-        beat.append(0.5)
-        beat.append(1)
-        beat.append(0.5)
-        beat.append(0.25)
-        beat.append(0.25)
 
+beat = beat_gen_sim(length)
 
-    else:
-        beat.append(0.5)
-        beat.append(0.5)
+beat_time = [i * tempo for i in beat] # convert every component from beat count to real time duration
 
 #############################################################################################################################
 # Convert the melody into semitone count
@@ -79,7 +70,7 @@ print(melody)
 piece = chord_maj_ran_gen(root, melody)
 
 # generate the waveform with waveform_gen function
-samples = waveform_gen_exp(bar, tempo, sample_rate, piece, beat)
+samples = waveform_gen_exp(bar, tempo, sample_rate, piece, beat_time)
 
 ##############################################################################################################################
 # generate the wav file
