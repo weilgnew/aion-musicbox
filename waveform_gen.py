@@ -75,6 +75,18 @@ def waveform_gen_exp(bar, tempo, sample_rate, piece_list,beat_list):
         count = count + 1
         t = t + int(sample_rate * beat_list[count])
     
+    # remove addtional blanks in waveform list
+    # intialise counters
+    count = 0
+    waveform2 = []
+    for i in waveform:
+        if (i == 0):
+            count = count +1
+            if count == 4:
+                break
+        else:
+            waveform2.append(i)
+    
     #np.savetxt('waveform_text.txt',waveform, fmt ='%10.5f')
-    return waveform
+    return waveform2
 
