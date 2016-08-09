@@ -37,7 +37,7 @@ bar = 10        # how many bar, not the one with liquor
 ############################################################################################################################
 # Yes, this is where it generates the melody, or movement, progression
 
-melody_ = melody_gen_sim(length)
+melody = melody_gen_sim(length)
     
 # Just to let you know the progresion
 print(melody)
