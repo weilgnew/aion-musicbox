@@ -1,9 +1,11 @@
 from scipy.io import wavfile
 import numpy as np
-from waveform_gen import waveform_gen_exp
+from waveform_generator import waveform_gen_exp
 from chord_gen import chord_maj_ran_gen
+from chord_gen import chord_maj_gen_2
 from melody_gen import melody_gen_sim
 from beat_gen import beat_gen_sim
+from beat_gen import beat_gen_chord_2
 
 ##############################################################################################################################
 # notes hold the dictionary to frequency of different notes
@@ -24,8 +26,8 @@ file_note.close()
 # Set the parameters
 # Generation of the melody
 melody = [1]
-length = 50     # set the melody length
-root = 10       # set the melody root note
+length = 60     # set the melody length
+root = 40       # set the melody root note
 volume = 15       # set the volume, self explanatory I believe 
 sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
 tempo = 0.125      # fastest speed for one note, in sec 
@@ -35,7 +37,7 @@ bar = 10        # how many bar, not the one with liquor
 ############################################################################################################################
 # Yes, this is where it generates the melody, or movement, progression
 
-melody = melody_gen_sim(length)
+melody_ = melody_gen_sim(length)
     
 # Just to let you know the progresion
 print(melody)
@@ -44,13 +46,13 @@ print(melody)
 ##############################################################################################################################
 # beat generator, it doesnt need to be here, best is in another function or file. Well,  when I have time
 
-beat = beat_gen_sim(length)
+beat = beat_gen_chord_2(length)
 
 beat_time = [i * tempo for i in beat] # convert every component from beat count to real time duration
 
 #############################################################################################################################
 # Convert the melody into semitone count
-for i in range(0, length):
+for i in range(0, len(melody)):
     if melody[i] == 1:
         melody[i] = 0 + root
     if melody[i] == 2:
@@ -67,8 +69,9 @@ for i in range(0, length):
         melody[i] = 11 + root
 
 print(melody)
-piece = chord_maj_ran_gen(root, melody)
+piece = chord_maj_gen_2(root, melody)
 
+print(piece)
 # generate the waveform with waveform_gen function
 samples = waveform_gen_exp(bar, tempo, sample_rate, piece, beat_time)
 
@@ -76,7 +79,4 @@ samples = waveform_gen_exp(bar, tempo, sample_rate, piece, beat_time)
 # generate the wav file
 samples2 = np.asarray(samples)
 wavfile.write('wave_test0608.wav', sample_rate, samples2.astype(np.dtype('i2')))
-
-
-
 
