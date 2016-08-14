@@ -1,5 +1,6 @@
 from scipy.io import wavfile
 import numpy as np
+import datetime
 from waveform_generator import waveform_gen_exp
 from chord_gen import chord_maj_ran_gen
 from chord_gen import chord_maj_gen_2
@@ -23,7 +24,7 @@ file_note.close()
 
         
 ###########################################################################################################################
-# Set the parameters
+# Set and intialise the parameters
 # Generation of the melody
 melody = [1]
 length = 60     # set the melody length
@@ -32,6 +33,12 @@ volume = 15       # set the volume, self explanatory I believe
 sample_rate = 22050 # sampling rate for the wav file, rule of thumb: the upper frequency is half of sampling rate
 tempo = 0.125      # fastest speed for one note, in sec 
 bar = 10        # how many bar, not the one with liquor
+beat = None        # variable for beat generation (discrete)
+beat_time = None   # variable for beat generation (duration)
+piece = None       # variable for final piece
+samples = None     # variable for wave generation (raw)
+samples2 = None    # variable for wave generation (processed)
+nowdate = None     # variable for obtaining current date (for saving)
 
 
 ############################################################################################################################
@@ -78,5 +85,7 @@ samples = waveform_gen_exp(bar, tempo, sample_rate, piece, beat_time)
 ##############################################################################################################################
 # generate the wav file
 samples2 = np.asarray(samples)
-wavfile.write('wave_test0608.wav', sample_rate, samples2.astype(np.dtype('i2')))
-
+#generate date for saving
+nowdate = datetime.datetime.now()
+wavfile.write('%d_%d_%dt%d.%d.%dwave_test.wav' %(nowdate.year, nowdate.month, nowdate.day, nowdate.hour, nowdate.minute, \
+                nowdate.second), sample_rate, samples2.astype(np.dtype('i2')))
